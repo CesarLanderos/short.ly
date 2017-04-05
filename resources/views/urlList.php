@@ -22,7 +22,7 @@
                         <tr>
                             <td><?= $url->url ?></td>
                             <td>
-                                <a href="short.ly/<?= $url->code ?>">
+                                <a href="/<?= $url->code ?>">
                                     short.ly/<?= $url->code ?>
                                 </a>
                             </td>

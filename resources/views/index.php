@@ -46,9 +46,13 @@
             <div class="container">
                 <?php if (isset($url)) : ?>
                     <div class="notification has-text-centered">
-                        <h2 class="subtitle">HEY!, here is your new SHORT URL (for <a href="<?= $url->url ?>"><?= $url->url ?></a>): </h2>
+                        <h2 class="subtitle">
+                            HEY!, here is your new SHORT URL (for
+                            <a href="<?= $url->url ?>"><?= $url->url ?></a>
+                            ):
+                        </h2>
                         <h1 class="title">
-                            <a href="short.ly/<?= $url->code ?>">short.ly/<?= $url->code ?></a>
+                            <a href="/<?= $url->code ?>">short.ly/<?= $url->code ?></a>
                         </h1>
                         <h2 class="subtitle">Awesome, isn't it? 😋</h2>
                     </div>

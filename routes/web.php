@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Services\UrlHashService;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,4 +53,8 @@ $app->get('all_urls', function () {
     return view('urlList', [
         'urls' => \App\Url::all(),
     ]);
+});
+
+$app->get('{urlCode}', function ($urlCode, UrlHashService $urlHasher) {
+    return redirect($urlHasher->resolve($urlCode));
 });
