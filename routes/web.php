@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -12,5 +14,35 @@
 */
 
 $app->get('/', function () use ($app) {
-    return $app->version();
+    return view('index');
+});
+
+$app->post('/', function (Request $request) use ($app) {
+    $url = \App\Url::where('url', $request->url)->first();
+
+    if (is_null($url)) {
+        $url = $request->url;
+
+        // clean from extra slashes
+        $url = trim($url, '/');
+
+        // if povided url does not have the http protocol, add it
+        if (!preg_match('#^http(s)?://#', $url)) {
+            $url = 'http://' . $url;
+        }
+
+        $url = \App\Url::create([
+            'url' => $url,
+        ]);
+    }
+
+    return view('index', [
+        'url' => $url,
+    ]);
+});
+
+$app->get('all_urls', function () {
+    return view('urlList', [
+        'urls' => \App\Url::all(),
+    ]);
 });
