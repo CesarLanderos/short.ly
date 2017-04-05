@@ -18,21 +18,28 @@ $app->get('/', function () use ($app) {
 });
 
 $app->post('/', function (Request $request) use ($app) {
-    $url = \App\Url::where('url', $request->url)->first();
+    $urlString = $request->url;
+
+    // clean from extra slashes
+    $urlString = trim($urlString, '/');
+
+    // if povided url does not have the http protocol, add it
+    if (!preg_match('#^http(s)?://#', $urlString)) {
+        $urlString = 'http://' . $urlString;
+    }
+
+    if (!filter_var($urlString, FILTER_VALIDATE_URL)) {
+        return view('index', [
+            'isNotValidUrl' => true,
+            'invalidUrl' => $urlString,
+        ]);
+    }
+
+    $url = \App\Url::where('url', $urlString)->first();
 
     if (is_null($url)) {
-        $url = $request->url;
-
-        // clean from extra slashes
-        $url = trim($url, '/');
-
-        // if povided url does not have the http protocol, add it
-        if (!preg_match('#^http(s)?://#', $url)) {
-            $url = 'http://' . $url;
-        }
-
         $url = \App\Url::create([
-            'url' => $url,
+            'url' => $urlString,
         ]);
     }
 

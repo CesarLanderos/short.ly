@@ -2,17 +2,58 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title></title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Short.ly</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.min.css">
     </head>
     <body>
-        <form class="" action="/" method="post">
-            <input type="text" name="url" />
-            <button type="submit" name="button">Generar</button>
-        </form>
-        <?php if (isset($url)) : ?>
-            <div class="">
-                short.ly/<?= $url->code ?>
+        <?php require_once('partials/header.php') ?>
+        <section class="hero">
+            <div class="hero-body">
+                <div class="container">
+                    <h1 class="title has-text-centered">
+                        Paste those BIG urls on Twitter... or whatevs...
+                    </h1>
+                    <?php if (isset($isNotValidUrl)) : ?>
+                        <div class="notification is-warning">
+                            The url <?= $invalidUrl?> doens't seem to be a valid url 😕
+                        </div>
+                    <?php endif ?>
+                    <form class="" action="/" method="post">
+                        <div class="field has-addons">
+                            <p class="control is-expanded">
+                                <input
+                                    class="input is-large"
+                                    type="text"
+                                    name="url"
+                                    placeholder="Insert a url here"
+                                    value="<?= $invalidUrl ?? '' ?>"
+                                    autofocus
+                                />
+                            </p>
+                            <p class="control">
+                                <button type="submit" class="button is-primary is-large">
+                                    Shorten-it!
+                                </button>
+                            </p>
+                        </div>
+                    </form>
+                </div>
             </div>
-        <?php endif; ?>
+        </section>
+        <section class="section">
+            <div class="container">
+                <?php if (isset($url)) : ?>
+                    <div class="notification has-text-centered">
+                        <h2 class="subtitle">HEY!, here is your new SHORT URL (for <a href="<?= $url->url ?>"><?= $url->url ?></a>): </h2>
+                        <h1 class="title">
+                            <a href="short.ly/<?= $url->code ?>">short.ly/<?= $url->code ?></a>
+                        </h1>
+                        <h2 class="subtitle">Awesome, isn't it? 😋</h2>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </section>
     </body>
 </html>
