@@ -34,7 +34,7 @@ class UrlHashService
             return false;
         }
 
-        Cache::forever($code, $url->url);
+        Cache::put($code, $url->url, 60);
 
         return $url->url;
     }
