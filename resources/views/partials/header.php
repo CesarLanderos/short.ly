@@ -19,6 +19,9 @@
             <a class="nav-item" href="/all_urls">
                 Shortened urls
             </a>
+            <a class="nav-item" href="/all_domains">
+                Domains registered
+            </a>
         </div>
     </nav>
 </div>
