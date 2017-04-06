@@ -46,6 +46,14 @@
                                 </button>
                             </p>
                         </div>
+                        <div class="field">
+                            <p class="control">
+                                <label class="checkbox">
+                                    <input type="checkbox" name="new">
+                                    Garantee new.
+                                </label>
+                            </p>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -36,12 +36,20 @@ $app->post('/', function (Request $request) use ($app) {
         ]);
     }
 
-    $url = \App\Url::where('url', $urlString)->first();
-
-    if (is_null($url)) {
+    if ($request->has('new')) {
         $url = \App\Url::create([
             'url' => $urlString,
+            'default' => 0,
         ]);
+    } else {
+        $url = \App\Url::where('url', $urlString)->where('default', 1)->first();
+
+        if (is_null($url)) {
+            $url = \App\Url::create([
+                'url' => $urlString,
+                'default' => 1,
+            ]);
+        }
     }
 
     return view('index', [
