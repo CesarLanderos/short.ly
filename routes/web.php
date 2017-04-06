@@ -25,8 +25,8 @@ $app->post('/', function (Request $request) use ($app) {
     $urlString = trim($urlString, '/');
 
     // if povided url does not have the http protocol, add it
-    if (!preg_match('#^http(s)?://#', $urlString)) {
-        $urlString = 'http://' . $urlString;
+    if (!count(explode('://', $urlString)) === 1) {
+        $urlString = 'https://' . $urlString;
     }
 
     if (!filter_var($urlString, FILTER_VALIDATE_URL)) {
