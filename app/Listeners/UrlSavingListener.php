@@ -25,6 +25,10 @@ class UrlSavingListener
      */
     public function handle(UrlSaving $event)
     {
+        if (isset($event->url->code)) {
+            return;
+        }
+
         $event->url->code = $this->urlHasher->make($event->url->id);
         $event->url->save();
     }

@@ -15,6 +15,7 @@
                     <tr>
                         <th>Original</th>
                         <th>Shortened</th>
+                        <th>Number of clicks</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,6 +27,7 @@
                                     short.ly/<?= $url->code ?>
                                 </a>
                             </td>
+                            <td><?= $url->number_of_clicks ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -33,6 +35,7 @@
                     <tr>
                         <th>Original</th>
                         <th>Shortened</th>
+                        <th>Number of clicks</th>
                     </tr>
                 </tfoot>
             </table>

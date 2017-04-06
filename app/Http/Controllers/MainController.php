@@ -54,10 +54,18 @@ class MainController extends Controller
             $url = UrlModel::where('url', $urlString)->where('default', 1)->first();
 
             if (is_null($url)) {
-                $url = UrlModel::create([
-                    'url' => $urlString,
-                    'default' => 1,
-                ]);
+                if ($name = $request->get('name')) {
+                    $url = UrlModel::create([
+                        'url' => $urlString,
+                        'code' => $name,
+                        'default' => 1,
+                    ]);
+                } else {
+                    $url = UrlModel::create([
+                        'url' => $urlString,
+                        'default' => 1,
+                    ]);
+                }
 
                 $this->incrementDomainCount($urlString);
             }
@@ -108,6 +116,9 @@ class MainController extends Controller
                 'currentUrl' => url() . $request->getPathInfo(),
             ]);
         }
+
+        $url = UrlModel::where('code', $urlCode)->first();
+        $url->increment('number_of_clicks');
 
         return redirect($urlToRedirect);
     }

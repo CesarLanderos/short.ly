@@ -40,6 +40,16 @@
                                     autofocus
                                 />
                             </p>
+                            <p class="control is-expanded">
+                                <input
+                                    class="input is-large"
+                                    type="text"
+                                    name="name"
+                                    placeholder="Set a custom name (optional)"
+                                    value="<?= $invalidUrl ?? '' ?>"
+                                    autofocus
+                                />
+                            </p>
                             <p class="control">
                                 <button type="submit" class="button is-primary is-large">
                                     Shorten-it!

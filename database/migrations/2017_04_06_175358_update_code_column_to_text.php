@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUrlsTable extends Migration
+class UpdateCodeColumnToText extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateUrlsTable extends Migration
      */
     public function up()
     {
-        Schema::create('urls', function (Blueprint $table) {
-            $table->increments('id');
-            $table->text('code');
-            $table->text('url');
-            $table->timestamps();
+        Schema::table('urls', function (Blueprint $table) {
+            //
         });
     }
 
@@ -28,6 +25,8 @@ class CreateUrlsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('urls');
+        Schema::table('urls', function (Blueprint $table) {
+            //
+        });
     }
 }
