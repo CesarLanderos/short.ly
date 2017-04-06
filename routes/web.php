@@ -55,6 +55,15 @@ $app->get('all_urls', function () {
     ]);
 });
 
-$app->get('{urlCode}', function ($urlCode, UrlHashService $urlHasher) {
-    return redirect($urlHasher->resolve($urlCode));
+$app->get('{urlCode}', function ($urlCode, UrlHashService $urlHasher, Request $request) use ($app) {
+    $urlToRedirect = $urlHasher->resolve($urlCode);
+
+    if (!$urlToRedirect) {
+        return view('index', [
+            'urlNotFound' => true,
+            'currentUrl' => url() . $request->getPathInfo(),
+        ]);
+    }
+
+    return redirect($urlToRedirect);
 });

@@ -15,8 +15,16 @@
                     <h1 class="title has-text-centered">
                         Paste those BIG urls on Twitter... or whatevs...
                     </h1>
+                    <?php if (isset($urlNotFound)) : ?>
+                        <div class="notification has-text-centered">
+                            <h1 class="title">Not found</h1>
+                            <span class="subtitle">
+                                The url <strong><?= $currentUrl ?></strong> doesn't seem to exist on our system 😕, but you can shorten a new one here 😄.
+                            </span>
+                        </div>
+                    <?php endif ?>
                     <?php if (isset($isNotValidUrl)) : ?>
-                        <div class="notification is-warning">
+                        <div class="notification is-warning has-text-centered">
                             The url <?= $invalidUrl?> doens't seem to be a valid url 😕
                         </div>
                     <?php endif ?>
